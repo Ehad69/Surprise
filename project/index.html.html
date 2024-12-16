@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Projects</title>
+    <style>
+        body {
+            background-color: black;
+            color: white; /* Text color for visibility on black background */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+        .hidden {
+            display: none;
+        }
+        iframe {
+            border: none; /* Remove border from iframe */
+        }
+    </style>
+    <script>
+        function showAnimation() {
+            document.getElementById('countdown').classList.add('hidden');
+            document.getElementById('animation').classList.remove('hidden');
+        }
+
+        // Function to monitor the countdown completion
+        function monitorCountdown() {
+            var countdownFrame = document.getElementById('countdown-frame');
+            countdownFrame.onload = function() {
+                var countdownDoc = countdownFrame.contentDocument || countdownFrame.contentWindow.document;
+                var countdownTimer = countdownDoc.getElementById('countdown-timer');
+                
+                // Set interval to check countdown status
+                var interval = setInterval(function() {
+                    if (countdownTimer && countdownTimer.textContent === "0") {
+                        clearInterval(interval);
+                        showAnimation();
+                    }
+                }, 1000);
+            }
+        }
+
+        window.onload = function() {
+            monitorCountdown();
+        };
+    </script>
+</head>
+<body>
+    <!-- Countdown Project Section -->
+    <div id="countdown">
+        <!-- Include your countdown.html content here -->
+        <iframe id="countdown-frame" src="Countdown/countdown.html" style="width:100%; height:100vh;"></iframe>
+    </div>
+
+    <!-- Animation Project Section -->
+    <div id="animation" class="hidden">
+        <!-- Include your animation.html content here -->
+        <iframe src="Animation/animation.html" style="width:100%; height:100vh;"></iframe>
+    </div>
+</body>
+</html>
